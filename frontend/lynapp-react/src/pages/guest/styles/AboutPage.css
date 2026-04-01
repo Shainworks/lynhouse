@@ -1,0 +1,586 @@
+/* ================================
+    BASE STYLES
+    ================================ */
+.about-page {
+    min-height: 100vh;
+    background: var(--gradient-secondary);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ================================
+    SHARED SECTION STYLES
+    ================================ */
+.about-page .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--space-16);
+    color: var(--neutral-white);
+}
+
+/* ================================
+    HERO SECTION
+    ================================ */
+.about-page .hero-section {
+    padding: var(--space-20) var(--space-5);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 80vh;
+}
+
+.about-page .hero-content {
+    flex: 1;
+    max-width: 600px;
+}
+
+.about-page .hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--neutral-white);
+    line-height: 1.1;
+    margin-bottom: var(--space-6);
+}
+
+.about-page .gradient-text {
+    background: var(--gradient-gold);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-page .hero-subtitle {
+    font-size: 1.25rem;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+    margin-bottom: var(--space-8);
+}
+
+/* Hero Visual & Animation */
+.about-page .hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about-page .ai-animation {
+    position: relative;
+    width: 200px;
+    height: 200px;
+}
+
+.about-page .neural-node {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-primary);
+    border-radius: var(--radius-full);
+    animation: pulse 2s infinite;
+    box-shadow: var(--shadow-primary);
+}
+
+.about-page .neural-node:nth-child(1) {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.about-page .neural-node:nth-child(2) {
+    bottom: 0;
+    left: 0;
+    animation-delay: 0.7s;
+}
+
+.about-page .neural-node:nth-child(3) {
+    bottom: 0;
+    right: 0;
+    animation-delay: 1.4s;
+}
+
+/* ================================
+    MISSION SECTION
+    ================================ */
+.about-page .mission-section {
+    padding: var(--space-20) 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.about-page .mission-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-10);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-page .mission-card {
+  background: var(--card-bg);
+  padding: var(--space-10) var(--space-8);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  transition:
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.3s ease;
+  border: 1px solid var(--card-border);
+  position: relative;
+  overflow: hidden;
+  animation: missionCardIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.about-page .mission-grid .mission-card:nth-child(1) { animation-delay: 0.05s; }
+.about-page .mission-grid .mission-card:nth-child(2) { animation-delay: 0.15s; }
+.about-page .mission-grid .mission-card:nth-child(3) { animation-delay: 0.25s; }
+
+@keyframes missionCardIn {
+  from { opacity: 0; transform: translateY(35px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0)   scale(1); }
+}
+
+/* Top gradient bar */
+.about-page .mission-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 20px 20px 0 0;
+}
+
+/* Subtle shimmer sweep */
+.about-page .mission-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.2) 50%, transparent 60%);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.about-page .mission-card:hover {
+  transform: translateY(-14px) scale(1.02);
+  box-shadow:
+    0 28px 56px rgba(0, 0, 0, 0.12),
+    0 8px 24px rgba(0, 120, 26, 0.14);
+  border-color: var(--primary-green-40);
+}
+
+.about-page .mission-card:hover::before { transform: scaleX(1); }
+.about-page .mission-card:hover::after  { left: 140%; }
+
+.about-page .mission-icon {
+  font-size: 3rem;
+  margin-bottom: var(--space-5);
+  color: var(--primary-green);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: var(--success-bg);
+  border-radius: 50%;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    background 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+  position: relative;
+}
+
+.about-page .mission-icon::before {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 2px solid var(--primary-green-40);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.about-page .mission-card:hover .mission-icon {
+  transform: rotateY(360deg) scale(1.15);
+  background: var(--primary-green);
+  color: white;
+  box-shadow: 0 8px 24px rgba(0, 120, 26, 0.35);
+}
+
+.about-page .mission-card:hover .mission-icon::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.about-page .mission-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--neutral-text-dark);
+    margin-bottom: var(--space-4);
+}
+
+.about-page .mission-card p {
+    color: var(--neutral-text-medium);
+    line-height: 1.6;
+}
+
+/* ================================
+    TECHNOLOGY SECTION
+    ================================ */
+.about-page .tech-section {
+    padding: var(--space-20) 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: var(--space-5);
+    padding-right: var(--space-5);
+}
+
+.about-page .tech-features {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+}
+
+.about-page .tech-feature {
+    background: rgba(255, 255, 255, 0.1);
+    padding: var(--space-8);
+    border-radius: var(--radius-xl);
+    border-left: 4px solid var(--primary-green);
+    backdrop-filter: blur(5px);
+}
+
+.about-page .feature-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+}
+
+.about-page .feature-tag {
+    background: var(--gradient-gold);
+    color: var(--neutral-white);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.about-page .tech-feature h4 {
+    color: var(--neutral-white);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.about-page .tech-feature p {
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.6;
+}
+
+/* ================================
+    STATISTICS SECTION
+    ================================ */
+.about-page .stats-section {
+    padding: var(--space-20) 0;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.about-page .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-10);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-page .stat-item {
+    text-align: center;
+}
+
+.about-page .stat-number {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent-gold);
+    margin-bottom: var(--space-2);
+}
+
+.about-page .stat-label {
+    color: var(--neutral-white);
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* ================================
+    TEAM SECTION
+    ================================ */
+.about-page .team-section {
+    padding: var(--space-20) 0;
+}
+
+.about-page .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-10);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-page .team-member {
+  background: var(--card-bg);
+  padding: var(--space-10) var(--space-8);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  transition:
+    transform 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    box-shadow 0.45s cubic-bezier(0.23, 1, 0.32, 1),
+    border-color 0.3s ease;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--card-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-page .team-member::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.about-page .team-member:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow:
+    0 24px 48px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(0, 120, 26, 0.12);
+  border-color: var(--primary-green-40);
+}
+
+.about-page .team-member:hover::before {
+  opacity: 0.03;
+}
+
+.about-page .member-avatar {
+  width: 88px;
+  height: 88px;
+  border-radius: var(--radius-full);
+  background: var(--gradient-primary);
+  color: var(--neutral-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 auto var(--space-5);
+  position: relative;
+  transition:
+    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease;
+}
+
+/* Animated ring on avatar hover */
+.about-page .member-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed var(--primary-green-60);
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.about-page .team-member:hover .member-avatar {
+  transform: scale(1.12) rotate(5deg);
+  box-shadow: 0 12px 28px rgba(0, 120, 26, 0.35);
+}
+
+.about-page .team-member:hover .member-avatar::after {
+  opacity: 1;
+  transform: scale(1);
+  animation: avatarRingSpin 8s linear infinite;
+}
+
+@keyframes avatarRingSpin {
+  from { transform: scale(1) rotate(0deg); }
+  to   { transform: scale(1) rotate(360deg); }
+}
+
+.about-page .team-member h4 {
+    color: var(--neutral-text-dark);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+}
+
+.about-page .member-role {
+    color: var(--primary-green);
+    font-weight: 600;
+    margin-bottom: var(--space-4);
+}
+
+.about-page .member-bio {
+    color: var(--neutral-text-medium);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ================================
+    CALL-TO-ACTION SECTION
+    ================================ */
+.about-page .cta-section {
+    padding: var(--space-20) 0;
+    background: #1A5C5F;
+    backdrop-filter: blur(10px);
+}
+
+.about-page .cta-content {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--space-5);
+}
+
+.about-page .cta-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--neutral-white);
+    margin-bottom: var(--space-5);
+}
+
+.about-page .cta-content p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: var(--space-10);
+}
+
+/* CTA Buttons */
+.about-page .cta-buttons {
+    display: flex;
+    gap: var(--space-5);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.about-page .btn-primary,
+.about-page .btn-secondary {
+  padding: var(--space-4) var(--space-8);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition:
+    transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.35s ease,
+    background 0.3s ease;
+  min-width: 150px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shimmer sweep */
+.about-page .btn-primary::after,
+.about-page .btn-secondary::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.55s ease;
+}
+
+.about-page .btn-primary {
+  background: rgba(var(--accent-gold-rgb));
+  color: var(--btn-primary-text);
+  box-shadow: var(--shadow-primary);
+}
+
+.about-page .btn-primary:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: var(--shadow-primary-lg);
+}
+
+.about-page .btn-primary:hover::after,
+.about-page .btn-secondary:hover::after {
+  transform: translateX(100%);
+}
+
+.about-page .btn-secondary {
+  background: var(--btn-secondary-bg);
+  color: var(--btn-secondary-text);
+  border: 2px solid var(--btn-secondary-border);
+}
+
+.about-page .btn-secondary:hover {
+  background: var(--btn-secondary-hover);
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: var(--shadow-primary);
+}
+
+/* ================================
+    ANIMATIONS
+    ================================ */
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 0.7;
+    }
+}
+
+/* ================================
+    RESPONSIVE DESIGN
+    ================================ */
+@media (max-width: 768px) {
+    .about-page .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding: var(--space-16) var(--space-5);
+    }
+
+    .about-page .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .about-page .mission-grid,
+    .about-page .team-grid {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about-page .team-member:nth-child(2) {
+        order: -1;
+    }
+
+    .about-page .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-page .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}

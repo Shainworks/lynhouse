@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: lyn-housing-ai-app-backend
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --no-input && python manage.py migrate
+    startCommand: gunicorn lynapp-django.wsgi:application --bind 0.0.0.0:$PORT
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: ALLOWED_HOSTS
+        value: "0.0.0.0,lyn-housing-ai-app-backend.onrender.com"
+      - key: DATABASE_URL
+        fromDatabase:
+          name: lyn-housing-db
+          property: connectionString
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CORS_ALLOWED_ORIGINS
+        value: "https://lyn-housing-ai-app.vercel.app,https://www.lynaihousing.top"
+
+databases:
+  - name: lyn-housing-db
+    plan: free

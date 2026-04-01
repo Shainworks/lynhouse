@@ -1,0 +1,110 @@
+/* =============================================================================
+   SCROLL REVEAL — Global scroll-triggered animation system
+   
+   How it works:
+   1. .sr-element starts in its "hidden" state (transform + opacity)
+   2. When IntersectionObserver fires, .sr-visible is added
+   3. The element transitions to its natural resting position
+   
+   Variants: fade-up · fade-down · fade-left · fade-right
+             scale · scale-up · zoom-in · flip-x · flip-y
+============================================================================= */
+
+/* ── Base: all scroll-reveal elements start hidden ──────────── */
+.sr-element {
+  opacity: 0;
+  transition:
+    opacity    var(--sr-duration, 0.65s) cubic-bezier(0.23, 1, 0.32, 1) var(--sr-delay, 0s),
+    transform  var(--sr-duration, 0.65s) cubic-bezier(0.23, 1, 0.32, 1) var(--sr-delay, 0s),
+    filter     var(--sr-duration, 0.65s) ease var(--sr-delay, 0s);
+  will-change: opacity, transform;
+}
+
+/* ── Visible state: all variants land here ──────────────────── */
+.sr-element.sr-visible {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* ── Layout helpers: ensure wrappers don't break grid/flex ──── */
+/* When inside a CSS grid, the sr-element IS the grid item       */
+.sr-element {
+  display: block;   /* default — override per context if needed */
+  width: 100%;
+}
+
+/* Inside flex rows, grow to fill */
+.sr-element.sr-flex-item {
+  flex: 1 1 auto;
+}
+
+/* ── Variant: fade-up (content slides up from below) ─────────── */
+.sr-fade-up {
+  transform: translateY(48px);
+}
+
+/* ── Variant: fade-down (content slides down from above) ──────── */
+.sr-fade-down {
+  transform: translateY(-48px);
+}
+
+/* ── Variant: fade-left (slides in from right) ───────────────── */
+.sr-fade-left {
+  transform: translateX(56px);
+}
+
+/* ── Variant: fade-right (slides in from left) ───────────────── */
+.sr-fade-right {
+  transform: translateX(-56px);
+}
+
+/* ── Variant: scale (grows from slightly smaller) ────────────── */
+.sr-scale {
+  transform: scale(0.88);
+}
+
+/* ── Variant: scale-up (grows from below + scale) ────────────── */
+.sr-scale-up {
+  transform: translateY(36px) scale(0.92);
+}
+
+/* ── Variant: zoom-in (pops in from center with blur) ─────────── */
+.sr-zoom-in {
+  transform: scale(0.82);
+  filter: blur(6px);
+}
+
+/* ── Variant: flip-x (rotates on X axis like flipping a card) ── */
+.sr-flip-x {
+  transform: perspective(600px) rotateX(20deg) translateY(30px);
+}
+
+/* ── Variant: flip-y (rotates on Y axis) ────────────────────── */
+.sr-flip-y {
+  transform: perspective(600px) rotateY(22deg) translateX(30px);
+}
+
+/* ── Stagger helper classes ──────────────────────────────────── */
+/* Apply these to siblings to auto-stagger without JS */
+.sr-stagger-1  { --sr-delay: 0.05s; }
+.sr-stagger-2  { --sr-delay: 0.13s; }
+.sr-stagger-3  { --sr-delay: 0.21s; }
+.sr-stagger-4  { --sr-delay: 0.29s; }
+.sr-stagger-5  { --sr-delay: 0.37s; }
+.sr-stagger-6  { --sr-delay: 0.45s; }
+
+/* ── Speed modifiers ─────────────────────────────────────────── */
+.sr-fast   { --sr-duration: 0.4s; }
+.sr-slow   { --sr-duration: 1.0s; }
+.sr-slower { --sr-duration: 1.4s; }
+
+/* ── Reduced motion: skip animations ─────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .sr-element {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+  }
+}

@@ -1,0 +1,137 @@
+/* ============================================================
+   FINANCIAL METRICS — Premium Animated Component
+   ============================================================ */
+
+.financial-metrics-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-radius: var(--radius-xl);
+    margin-top: var(--space-4);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(255, 255, 255, 0.19);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.8px);
+    -webkit-backdrop-filter: blur(5.8px);
+    animation: metricContainerIn 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0.1s both;
+}
+
+@keyframes metricContainerIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Metric Items ─────────────────────────────────────── */
+.financial-metrics-container .metric-item {
+    padding: var(--space-3) var(--space-4);
+    background: var(--neutral-soft);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    text-align: center;
+    border-bottom: 2px solid var(--neutral-border);
+    transition:
+        transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer sweep on metric hover */
+.financial-metrics-container .metric-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.45) 50%, transparent 60%);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.financial-metrics-container .metric-item:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background: var(--neutral-white);
+    border-color: var(--primary-green-40);
+}
+
+.financial-metrics-container .metric-item:hover::before {
+    left: 140%;
+}
+
+/* Staggered entrance */
+.financial-metrics-container .metric-item:nth-child(1) { animation: metricItemIn 0.5s 0.15s both; }
+.financial-metrics-container .metric-item:nth-child(2) { animation: metricItemIn 0.5s 0.22s both; }
+.financial-metrics-container .metric-item:nth-child(3) { animation: metricItemIn 0.5s 0.29s both; }
+.financial-metrics-container .metric-item:nth-child(4) { animation: metricItemIn 0.5s 0.36s both; }
+.financial-metrics-container .metric-item:nth-child(5) { animation: metricItemIn 0.5s 0.43s both; }
+.financial-metrics-container .metric-item:nth-child(6) { animation: metricItemIn 0.5s 0.50s both; }
+
+@keyframes metricItemIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+.financial-metrics-container .metric-item strong {
+    color: var(--neutral-text-medium);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ── Metric Values ────────────────────────────────────── */
+.financial-metrics-container .metric-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.financial-metrics-container .metric-item:hover .metric-value {
+    transform: scale(1.08);
+}
+
+.financial-metrics-container .metric-value.positive { color: var(--cta-green); }
+.financial-metrics-container .metric-value.negative  { color: var(--cta-coral); }
+.financial-metrics-container .metric-value.neutral   { color: var(--accent-gold); }
+.financial-metrics-container .metric-value.default   { color: var(--neutral-text-dark); }
+
+/* ── Responsive ───────────────────────────────────────── */
+@media (max-width: 768px) {
+    .financial-metrics-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .financial-metrics-container .metric-item {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .financial-metrics-container .metric-item:last-child {
+        border-bottom: none;
+    }
+
+    .financial-metrics-container .metric-item:hover {
+        transform: translateX(4px) scale(1.01);
+    }
+}
+
+/* ── Reduced Motion ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    .financial-metrics-container,
+    .financial-metrics-container .metric-item,
+    .financial-metrics-container .metric-value {
+        animation: none !important;
+        transition: none !important;
+    }
+}
