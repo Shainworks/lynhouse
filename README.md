@@ -342,7 +342,7 @@ We welcome contributions from developers of all experience levels! Here's how yo
 ---
 
 ## License
-[MIT License](./LICENSE) © [ndmh99](https://github.com/ndmh99)
+[MIT License](./LICENSE) © [SHAIN](https://github.com/Shainworks)
 
 ---
 
